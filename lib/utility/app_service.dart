@@ -1,15 +1,30 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:checkofficer/models/officer_model.dart';
+import 'package:checkofficer/utility/app_constant.dart';
 import 'package:checkofficer/utility/app_controller.dart';
 import 'package:checkofficer/utility/app_dialog.dart';
 import 'package:checkofficer/widgets/widget_button.dart';
 import 'package:checkofficer/widgets/widget_text.dart';
+import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AppService {
   AppController appController = Get.put(AppController());
+
+  Future<void> processFindOfficer() async {
+    await Dio().get(AppConstant.urlApiGetAllOffiecer).then((value) {
+      json.decode(value.data).forEach((element) {
+        print('## $element');
+
+        OfficerModel officerModel = OfficerModel.fromMap(element);
+        appController.officerModels.add(officerModel);
+      });
+    });
+  }
 
   void processFindDateTime() {
     DateFormat dateFormat = DateFormat('dd/MM/yy HH:mm:ss');

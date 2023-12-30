@@ -1,3 +1,4 @@
+import 'package:checkofficer/models/officer_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,4 +9,6 @@ class AppController extends GetxController {
   RxMap<MarkerId, Marker> markers = <MarkerId, Marker>{}.obs;
 
   RxString displayDateTime = ''.obs;
+
+  RxList<OfficerModel> officerModels = <OfficerModel>[].obs;
 }

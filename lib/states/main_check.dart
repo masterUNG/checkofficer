@@ -21,9 +21,9 @@ class _MainCheckState extends State<MainCheck> {
   void initState() {
     super.initState();
 
-    refreshState();
+    AppService().processFindOfficer().then((value) => findPosition());
 
-    findPosition();
+    refreshState();
   }
 
   void findPosition() {
@@ -45,7 +45,7 @@ class _MainCheckState extends State<MainCheck> {
       AppService().processFindDateTime();
 
       mySecond++;
-      if (mySecond == 10) {
+      if (mySecond == 1) {
         mySecond = 0;
         findPosition();
       }
