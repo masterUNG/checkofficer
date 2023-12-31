@@ -68,6 +68,8 @@ class _MainCheckState extends State<MainCheck> {
 
             appController.checkInOutOfficerModels.add(element);
 
+            AppService().checkStatusInOut();
+
             print(
                 '## ได้ระยะในการทำ CheckInOut  ---> ${appController.checkInOutOfficerModels.last.office}');
           }
@@ -139,6 +141,26 @@ class _MainCheckState extends State<MainCheck> {
       return Scaffold(
         appBar: AppBar(
           title: WidgetText(data: appController.displayDateTime.value),
+          actions: [
+            Container(
+              margin: const EdgeInsets.only(right: 16),
+              child: WidgetButton(
+                label: 'SignOut',
+                pressFunc: () {
+                  AppDialog().normalDialog(
+                      title: 'SignOut',
+                      contentWidget: const WidgetText(
+                          data: 'Please Confirm SignOut for SignOut'),
+                      firstActionWidget: WidgetButton(
+                        label: 'Confirm SignOut',
+                        pressFunc: () {
+                          AppService().processSignOut();
+                        },
+                      ));
+                },
+              ),
+            )
+          ],
         ),
         body: appController.positions.isEmpty
             ? const SizedBox()
@@ -168,14 +190,24 @@ class _MainCheckState extends State<MainCheck> {
                                     contentWidget: WidgetText(
                                         data:
                                             'Please Check In or Check Out at ${appController.checkInOutOfficerModels.last.office}'),
-                                    firstActionWidget: WidgetButton(
-                                      label: 'CheckIn',
-                                      pressFunc: () {},
-                                    ),
-                                    secondActionWidget: WidgetButton(
-                                      label: 'CheckOut',
-                                      pressFunc: () {},
-                                    ));
+                                    firstActionWidget:
+                                        appController.displayCheeckOut.value
+                                            ? const SizedBox()
+                                            : WidgetButton(
+                                                label: 'CheckIn',
+                                                pressFunc: () {
+                                                  AppService().processCheckIn();
+                                                },
+                                              ),
+                                    secondActionWidget: appController
+                                            .displayCheeckOut.value
+                                        ? WidgetButton(
+                                            label: 'CheckOut',
+                                            pressFunc: () {
+                                              AppService().processCheckOut();
+                                            },
+                                          )
+                                        : const SizedBox());
                               },
                             ),
                           ),

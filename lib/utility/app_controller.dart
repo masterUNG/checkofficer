@@ -1,3 +1,4 @@
+import 'package:checkofficer/models/check_in_model.dart';
 import 'package:checkofficer/models/officer_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -15,4 +16,8 @@ class AppController extends GetxController {
   RxList<OfficerModel> officerModels = <OfficerModel>[].obs;
 
   RxList<OfficerModel> checkInOutOfficerModels = <OfficerModel>[].obs;
+
+  RxList<CheckInModel> checkInModels = <CheckInModel>[].obs;
+
+  RxBool displayCheeckOut = false.obs;
 }
