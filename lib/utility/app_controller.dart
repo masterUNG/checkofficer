@@ -8,7 +8,11 @@ class AppController extends GetxController {
 
   RxMap<MarkerId, Marker> markers = <MarkerId, Marker>{}.obs;
 
+  RxMap<CircleId, Circle> circles = <CircleId, Circle>{}.obs;
+
   RxString displayDateTime = ''.obs;
 
   RxList<OfficerModel> officerModels = <OfficerModel>[].obs;
+
+  RxList<OfficerModel> checkInOutOfficerModels = <OfficerModel>[].obs;
 }

@@ -8,15 +8,17 @@ class AppDialog {
     required String title,
     Widget? contentWidget,
     Widget? actionWidget,
+    Widget? firstActionWidget,
+    Widget? secondActionWidget,
   }) {
     Get.dialog(
       AlertDialog(
         title: WidgetText(data: title),
         content: contentWidget,
-        actions: [
+        actions: [firstActionWidget ?? const SizedBox(), secondActionWidget ?? const SizedBox(),
           actionWidget ??
               WidgetButton(
-                label: 'OK',
+                label: firstActionWidget == null ? 'OK' : 'Cancel',
                 pressFunc: () => Get.back(),
               )
         ],
